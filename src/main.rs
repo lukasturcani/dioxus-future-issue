@@ -17,7 +17,18 @@ fn App(cx: Scope) -> Element {
     cx.render(rsx! {
         match *page.read() {
             Page::First => rsx! {
-                First {}
+                div {
+                    "First page"
+                    button {
+                        onclick: |_| {
+                            *page.write() = Page::Second;
+                            // cx.spawn(do_async_stuff());
+                            // cx.spawn_forever(do_async_stuff());
+                            do_async_stuff()
+                        },
+                        "Go to second page"
+                    }
+                }
             },
             Page::Second => rsx! {
                 div {
